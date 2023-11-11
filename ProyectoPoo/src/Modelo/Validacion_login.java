@@ -16,12 +16,12 @@ import java.sql.SQLException;
  */
 public class Validacion_login {
 
-    private final String SQL_AUTENTICACION = "SELECT usuario, contrasena FROM usuarios WHERE usuario=? AND contrasena=?";
+    private final String SQL_AUTENTICACION = "SELECT  usuario, contrasena, id_rol FROM usuarios WHERE usuario=? AND contrasena=?";
     Connection con;
     PreparedStatement stmt;
     ResultSet rs;
 
-    public boolean autenticacion(String user, String pass) {
+    public int autenticacion(String user, String pass) {
         try {
             con = Conexion.getConnection();
             stmt = con.prepareStatement(SQL_AUTENTICACION);
@@ -29,7 +29,7 @@ public class Validacion_login {
             stmt.setString(2, pass);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                return true;    
+                return rs.getInt("id_rol");   
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,6 +38,8 @@ public class Validacion_login {
             Conexion.close(con);
             Conexion.close(rs);
         }
-         return false;
+         return -1;
     }
+    
+
 }
