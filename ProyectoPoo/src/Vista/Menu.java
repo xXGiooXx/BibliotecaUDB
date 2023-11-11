@@ -5,9 +5,11 @@
  */
 package Vista;
 
+import Controlador.ControladorMenu;
 import Controlador.ControladorUsuario;
 import Modelo.Usuario;
 import Modelo.UsuarioDAO;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,8 +20,20 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+
     public Menu() {
         initComponents();
+        setLocationRelativeTo(null);
+        ControladorMenu controladorMenu = new ControladorMenu(); //SE INSTANCIA EL CONTROLADOR Y SE LE MANDA TODOS LOS ACTION
+        menu_cd.addActionListener(controladorMenu);              // PARA MANEJAR LOS EVENTOS DESDE EL CONTROLADOR  
+        menu_dvd.addActionListener(controladorMenu);
+        menu_libro.addActionListener(controladorMenu);
+        menu_revista.addActionListener(controladorMenu);
+        menu_material_prestamo.addActionListener(controladorMenu);
+        menu_material_devolucion.addActionListener(controladorMenu);
+        menu_usuario_gestionar.addActionListener(controladorMenu);
+        menu_opciones_contraseña.addActionListener(controladorMenu);
+        menu_opciones_salir.addActionListener(controladorMenu);
     }
 
     /**
@@ -31,19 +45,9 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jFrame1 = new javax.swing.JFrame();
-        jFrame2 = new javax.swing.JFrame();
-        jMenu3 = new javax.swing.JMenu();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        jPopupMenu3 = new javax.swing.JPopupMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
+        pnl_contenedor_menu = new javax.swing.JPanel();
+        menu_bar = new javax.swing.JMenuBar();
+        menu_materiales = new javax.swing.JMenu();
         menu_gestionar_material = new javax.swing.JMenu();
         menu_cd = new javax.swing.JMenuItem();
         menu_dvd = new javax.swing.JMenuItem();
@@ -55,45 +59,27 @@ public class Menu extends javax.swing.JFrame {
         menu_usuario_gestionar = new javax.swing.JMenuItem();
         menu_opciones = new javax.swing.JMenu();
         menu_opciones_contraseña = new javax.swing.JMenuItem();
-        menu_salir = new javax.swing.JMenu();
-
-        jMenu1.setText("jMenu1");
-
-        jMenu2.setText("jMenu2");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jMenu3.setText("jMenu3");
-
-        jMenuItem7.setText("jMenuItem7");
-
-        jMenuItem8.setText("jMenuItem8");
-
-        jMenu8.setText("jMenu8");
+        menu_opciones_salir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("BIBLIOTECAUDB");
 
-        jMenu4.setText("Materiales");
+        pnl_contenedor_menu.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout pnl_contenedor_menuLayout = new javax.swing.GroupLayout(pnl_contenedor_menu);
+        pnl_contenedor_menu.setLayout(pnl_contenedor_menuLayout);
+        pnl_contenedor_menuLayout.setHorizontalGroup(
+            pnl_contenedor_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 670, Short.MAX_VALUE)
+        );
+        pnl_contenedor_menuLayout.setVerticalGroup(
+            pnl_contenedor_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 363, Short.MAX_VALUE)
+        );
+
+        menu_bar.setBackground(new java.awt.Color(102, 102, 102));
+
+        menu_materiales.setText("Materiales");
 
         menu_gestionar_material.setText("Gestionar");
 
@@ -114,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
         menu_revista.setText("REVISTAS");
         menu_gestionar_material.add(menu_revista);
 
-        jMenu4.add(menu_gestionar_material);
+        menu_materiales.add(menu_gestionar_material);
 
         menu_material_prestamo.setText("Prestamos");
         menu_material_prestamo.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +108,7 @@ public class Menu extends javax.swing.JFrame {
                 menu_material_prestamoActionPerformed(evt);
             }
         });
-        jMenu4.add(menu_material_prestamo);
+        menu_materiales.add(menu_material_prestamo);
 
         menu_material_devolucion.setText("Devoluciones");
         menu_material_devolucion.addActionListener(new java.awt.event.ActionListener() {
@@ -130,38 +116,39 @@ public class Menu extends javax.swing.JFrame {
                 menu_material_devolucionActionPerformed(evt);
             }
         });
-        jMenu4.add(menu_material_devolucion);
+        menu_materiales.add(menu_material_devolucion);
 
-        jMenuBar1.add(jMenu4);
+        menu_bar.add(menu_materiales);
 
         menu_usuarios.setText("Usuarios");
 
-        menu_usuario_gestionar.setText("Gestionar");
+        menu_usuario_gestionar.setText("Gestionar_Usuarios");
+        menu_usuario_gestionar.setActionCommand("Gestionar_Usuarios");
         menu_usuarios.add(menu_usuario_gestionar);
 
-        jMenuBar1.add(menu_usuarios);
+        menu_bar.add(menu_usuarios);
 
         menu_opciones.setText("Opciones");
 
         menu_opciones_contraseña.setText("Cambiar contraseña");
         menu_opciones.add(menu_opciones_contraseña);
 
-        jMenuBar1.add(menu_opciones);
+        menu_opciones_salir.setText("Salir");
+        menu_opciones.add(menu_opciones_salir);
 
-        menu_salir.setText("Salir");
-        jMenuBar1.add(menu_salir);
+        menu_bar.add(menu_opciones);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menu_bar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addComponent(pnl_contenedor_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 379, Short.MAX_VALUE)
+            .addComponent(pnl_contenedor_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -178,7 +165,8 @@ public class Menu extends javax.swing.JFrame {
     private void menu_dvdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_dvdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menu_dvdActionPerformed
-
+    
+   
     /**
      * @param args the command line arguments
      */
@@ -206,41 +194,25 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-//        Usuario usuario = new Usuario();
-//        UsuarioDAO usuarioDao = new UsuarioDAO();
-//        UsuarioPanel panel = new UsuarioPanel();
-//        Menu menu = new Menu();
-//        ControladorUsuario controladorUsuario = new ControladorUsuario(usuario, usuarioDao, panel, menu);
-//        menu.setVisible(true);
-    
+        
       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JFrame jFrame2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    public javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JPopupMenu jPopupMenu3;
+    private javax.swing.JMenuBar menu_bar;
     public javax.swing.JMenuItem menu_cd;
     public javax.swing.JMenuItem menu_dvd;
     public javax.swing.JMenu menu_gestionar_material;
     public javax.swing.JMenuItem menu_libro;
     public javax.swing.JMenuItem menu_material_devolucion;
     public javax.swing.JMenuItem menu_material_prestamo;
+    public javax.swing.JMenu menu_materiales;
     public javax.swing.JMenu menu_opciones;
-    private javax.swing.JMenuItem menu_opciones_contraseña;
+    public javax.swing.JMenuItem menu_opciones_contraseña;
+    public javax.swing.JMenuItem menu_opciones_salir;
     public javax.swing.JMenuItem menu_revista;
-    public javax.swing.JMenu menu_salir;
     public javax.swing.JMenuItem menu_usuario_gestionar;
     public javax.swing.JMenu menu_usuarios;
+    public javax.swing.JPanel pnl_contenedor_menu;
     // End of variables declaration//GEN-END:variables
 }
