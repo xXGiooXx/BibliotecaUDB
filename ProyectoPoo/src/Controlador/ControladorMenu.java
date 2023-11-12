@@ -25,6 +25,7 @@ public class ControladorMenu implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Gestionar_Usuarios")){
             usuarioForm.setVisible(true); //SE MUESTRA LA VENTANA USUARIOFORM AL DAR CLICK EN GESTIONAR USUARIOS
+            
         }
         if(e.getActionCommand().equals("Salir")){
             System.exit(0);

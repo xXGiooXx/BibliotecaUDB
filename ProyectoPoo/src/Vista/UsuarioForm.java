@@ -6,21 +6,73 @@
 package Vista;
 
 import Controlador.ControladorUsuario;
+import Modelo.UsuarioDAO;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author JONATHAN G
  */
 public class UsuarioForm extends javax.swing.JFrame {
-
+    
+    UsuarioDAO usuarioDao = new UsuarioDAO();
     /**
      * Creates new form UsuarioForm
      */
     public UsuarioForm() {
         initComponents();
         setLocationRelativeTo(null);
-        ControladorUsuario controladorUsuario = new ControladorUsuario();
+        
+        ControladorUsuario controladorUsuario = new ControladorUsuario(this, usuarioDao);
+        btn_agregar_usuario.addActionListener(controladorUsuario);
+        btn_modificar_usuario.addActionListener(controladorUsuario);
+        btn_eliminar_usuario.addActionListener(controladorUsuario);
+        Tabla_usuarios.setModel(usuarioDao.selectUsuarios());
+        Limpiar();
     }
+
+    public void Limpiar() {
+        txt_id_usuario.setEnabled(false);
+        txt_nombres_usuario.setText("");
+        txt_apellidos_usuario.setText("");
+        txt_rol.setText("");
+        txt_usuario.setText("");
+        txt_contrasena.setText("");
+
+        
+
+        btn_agregar_usuario.setEnabled(true);
+        btn_modificar_usuario.setEnabled(false);
+        btn_eliminar_usuario.setEnabled(false);
+       
+
+     
+
+    }
+
+    public void ModificarEliminarBtn() {
+        txt_id_usuario.setEnabled(false);
+        txt_nombres_usuario.setEnabled(true);
+        txt_apellidos_usuario.setEnabled(true);
+        txt_rol.setEnabled(true);
+        txt_usuario.setEnabled(true);
+        txt_contrasena.setEnabled(true);
+
+        lbl_id_usuario.setEnabled(false);
+        lbl_nombres_usuario.setEnabled(true);
+        lbl_apellidos_usuarios.setEnabled(true);
+        lbl_rol.setEnabled(true);
+        lbl_usuario.setEnabled(true);
+        lbl_contrasena.setEnabled(true);
+
+        btn_agregar_usuario.setEnabled(false);
+        btn_modificar_usuario.setEnabled(true);
+        btn_eliminar_usuario.setEnabled(true);
+    }
+
+    
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,14 +95,13 @@ public class UsuarioForm extends javax.swing.JFrame {
         txt_rol = new javax.swing.JTextField();
         txt_usuario = new javax.swing.JTextField();
         txt_contrasena = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scroll_tabla = new javax.swing.JScrollPane();
         Tabla_usuarios = new javax.swing.JTable();
         btn_agregar_usuario = new javax.swing.JButton();
         btn_modificar_usuario = new javax.swing.JButton();
         btn_eliminar_usuario = new javax.swing.JButton();
-        btn_buscar_usuario = new javax.swing.JButton();
-        txt_buscar_usuario = new javax.swing.JTextField();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BIBLIOTECAUDB - USUARIOS");
 
         lbl_id_usuario.setText("ID:");
@@ -76,33 +127,34 @@ public class UsuarioForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(Tabla_usuarios);
+        scroll_tabla.setViewportView(Tabla_usuarios);
 
         btn_agregar_usuario.setText("Agregar");
+        btn_agregar_usuario.setActionCommand("Agregar_usuario");
 
         btn_modificar_usuario.setText("Modificar");
+        btn_modificar_usuario.setActionCommand("Modificar_usuario");
 
         btn_eliminar_usuario.setText("Eliminar");
-
-        btn_buscar_usuario.setText("Buscar");
+        btn_eliminar_usuario.setActionCommand("Eliminar_usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_agregar_usuario)
-                    .addComponent(lbl_contrasena)
-                    .addComponent(lbl_usuario)
-                    .addComponent(lbl_apellidos_usuarios)
-                    .addComponent(lbl_nombres_usuario)
-                    .addComponent(lbl_rol)
-                    .addComponent(lbl_id_usuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_agregar_usuario)
+                            .addComponent(lbl_contrasena)
+                            .addComponent(lbl_usuario)
+                            .addComponent(lbl_apellidos_usuarios)
+                            .addComponent(lbl_nombres_usuario)
+                            .addComponent(lbl_rol)
+                            .addComponent(lbl_id_usuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txt_id_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,21 +163,15 @@ public class UsuarioForm extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txt_contrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                                 .addComponent(txt_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_rol, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txt_rol, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_modificar_usuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_eliminar_usuario))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_modificar_usuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_eliminar_usuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_buscar_usuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_buscar_usuario)
-                        .addGap(24, 24, 24))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                        .addGap(38, 38, 38)
+                        .addComponent(scroll_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,12 +204,10 @@ public class UsuarioForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_agregar_usuario)
                     .addComponent(btn_modificar_usuario)
-                    .addComponent(btn_eliminar_usuario)
-                    .addComponent(btn_buscar_usuario)
-                    .addComponent(txt_buscar_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(btn_eliminar_usuario))
+                .addGap(18, 18, 18)
+                .addComponent(scroll_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,23 +216,20 @@ public class UsuarioForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable Tabla_usuarios;
     public javax.swing.JButton btn_agregar_usuario;
-    public javax.swing.JButton btn_buscar_usuario;
     public javax.swing.JButton btn_eliminar_usuario;
     public javax.swing.JButton btn_modificar_usuario;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_apellidos_usuarios;
     private javax.swing.JLabel lbl_contrasena;
     private javax.swing.JLabel lbl_id_usuario;
     private javax.swing.JLabel lbl_nombres_usuario;
     private javax.swing.JLabel lbl_rol;
     private javax.swing.JLabel lbl_usuario;
+    public javax.swing.JScrollPane scroll_tabla;
     public javax.swing.JTextField txt_apellidos_usuario;
-    public javax.swing.JTextField txt_buscar_usuario;
     public javax.swing.JTextField txt_contrasena;
     public javax.swing.JTextField txt_id_usuario;
     public javax.swing.JTextField txt_nombres_usuario;

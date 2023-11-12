@@ -45,7 +45,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_contenedor_menu = new javax.swing.JPanel();
         menu_bar = new javax.swing.JMenuBar();
         menu_materiales = new javax.swing.JMenu();
         menu_gestionar_material = new javax.swing.JMenu();
@@ -63,19 +62,6 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BIBLIOTECAUDB");
-
-        pnl_contenedor_menu.setBackground(new java.awt.Color(102, 102, 102));
-
-        javax.swing.GroupLayout pnl_contenedor_menuLayout = new javax.swing.GroupLayout(pnl_contenedor_menu);
-        pnl_contenedor_menu.setLayout(pnl_contenedor_menuLayout);
-        pnl_contenedor_menuLayout.setHorizontalGroup(
-            pnl_contenedor_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
-        pnl_contenedor_menuLayout.setVerticalGroup(
-            pnl_contenedor_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
-        );
 
         menu_bar.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -123,7 +109,6 @@ public class Menu extends javax.swing.JFrame {
         menu_usuarios.setText("Usuarios");
 
         menu_usuario_gestionar.setText("Gestionar_Usuarios");
-        menu_usuario_gestionar.setActionCommand("Gestionar_Usuarios");
         menu_usuarios.add(menu_usuario_gestionar);
 
         menu_bar.add(menu_usuarios);
@@ -144,11 +129,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_contenedor_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_contenedor_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 363, Short.MAX_VALUE)
         );
 
         pack();
@@ -213,6 +198,5 @@ public class Menu extends javax.swing.JFrame {
     public javax.swing.JMenuItem menu_revista;
     public javax.swing.JMenuItem menu_usuario_gestionar;
     public javax.swing.JMenu menu_usuarios;
-    public javax.swing.JPanel pnl_contenedor_menu;
     // End of variables declaration//GEN-END:variables
 }
