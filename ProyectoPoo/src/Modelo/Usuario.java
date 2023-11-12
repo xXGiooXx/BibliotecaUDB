@@ -11,7 +11,7 @@ package Modelo;
  */
 public class Usuario {
     public int id_usuario;
-    public String rol;
+    public int id_rol;
     public String nombres;
     public String apellidos;
     public String usuario;
@@ -21,9 +21,9 @@ public class Usuario {
     public Usuario() { 
     }
     //CONSTRUCTOR PARAMETRIZADO                 
-    public Usuario(int id_usuario, String rol, String nombres, String apellidos, String usuario, String contrasena) {
+    public Usuario(int id_usuario, int id_rol, String nombres, String apellidos, String usuario, String contrasena) {
         this.id_usuario = id_usuario;
-        this.rol = rol;
+        this.id_rol = id_rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.usuario = usuario;
@@ -38,12 +38,12 @@ public class Usuario {
         this.id_usuario = id_usuario;
     }
 
-    public String getRol() {
-        return rol;
+    public int getId_rol() {
+        return id_rol;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setId_rol(int id_rol) {
+        this.id_rol = id_rol;
     }
 
     public String getNombres() {
