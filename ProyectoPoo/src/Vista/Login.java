@@ -35,8 +35,8 @@ public class Login extends javax.swing.JFrame {
         lbl_usuario = new javax.swing.JLabel();
         lbl_contrasena = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
-        txt_contrasena = new javax.swing.JTextField();
         btn_iniciar_sesion = new javax.swing.JToggleButton();
+        txt_contrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,17 +53,17 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(btn_iniciar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_contrasena)
                             .addComponent(lbl_usuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_usuario)
-                            .addComponent(txt_contrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(btn_iniciar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_contrasena)
+                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,9 +77,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_contrasena)
                     .addComponent(txt_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(57, 57, 57)
                 .addComponent(btn_iniciar_sesion)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,7 +124,7 @@ public class Login extends javax.swing.JFrame {
     public javax.swing.JToggleButton btn_iniciar_sesion;
     public javax.swing.JLabel lbl_contrasena;
     public javax.swing.JLabel lbl_usuario;
-    public javax.swing.JTextField txt_contrasena;
+    public javax.swing.JPasswordField txt_contrasena;
     public javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }
