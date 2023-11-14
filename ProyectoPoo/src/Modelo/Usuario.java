@@ -10,12 +10,12 @@ package Modelo;
  * @author JONATHAN G
  */
 public class Usuario {
-    public int id_usuario;
-    public int id_rol;
-    public String nombres;
-    public String apellidos;
-    public String usuario;
-    public String contrasena;
+    private int id_usuario;
+    private int id_rol;
+    private String nombres;
+    private String apellidos;
+    private String usuario;
+    private String contrasena;
 
     //CONSTRUCTOR VACIO
     public Usuario() { 

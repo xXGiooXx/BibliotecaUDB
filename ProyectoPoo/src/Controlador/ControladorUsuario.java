@@ -10,10 +10,8 @@ import Modelo.UsuarioDAO;
 import Vista.UsuarioForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -70,7 +68,7 @@ public class ControladorUsuario implements ActionListener {
         }
         if (e.getActionCommand().equals("Eliminar_usuario")) {
             if (e.getSource() == usuarioForm.btn_eliminar_usuario) {
-                usuario.setId_usuario(Integer.parseInt(usuarioForm.txt_id_usuario.getText()));            
+                usuario.setId_usuario(Integer.parseInt(usuarioForm.txt_id_usuario.getText()));
                 if (usuarioDao.eliminarUsuario(usuario) >= 1) {
                     JOptionPane.showMessageDialog(null, "Registro Eliminado exitosamente");
                 } else {
@@ -83,7 +81,7 @@ public class ControladorUsuario implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Limpiar_usuario")) {
-            usuarioForm.Limpiar();
+            usuarioForm.Limpiar();         
         }
 
     }
