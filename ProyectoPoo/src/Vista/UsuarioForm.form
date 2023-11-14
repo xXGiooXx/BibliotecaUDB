@@ -53,6 +53,8 @@
                               <Component id="btn_modificar_usuario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_eliminar_usuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_limpiar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -103,6 +105,7 @@
                   <Component id="btn_agregar_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_modificar_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_eliminar_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="scroll_tabla" min="-2" pref="98" max="-2" attributes="0"/>
@@ -219,6 +222,15 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
         <Property name="actionCommand" type="java.lang.String" value="Eliminar_usuario"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_limpiar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
+        <Property name="actionCommand" type="java.lang.String" value="Limpiar_usuario"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

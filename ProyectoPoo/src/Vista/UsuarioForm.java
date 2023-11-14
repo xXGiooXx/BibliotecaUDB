@@ -7,6 +7,8 @@ package Vista;
 
 import Controlador.ControladorUsuario;
 import Modelo.UsuarioDAO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author JONATHAN G
  */
 public class UsuarioForm extends javax.swing.JFrame {
-    
+   
     UsuarioDAO usuarioDao = new UsuarioDAO();
     /**
      * Creates new form UsuarioForm
@@ -27,12 +29,23 @@ public class UsuarioForm extends javax.swing.JFrame {
         btn_agregar_usuario.addActionListener(controladorUsuario);
         btn_modificar_usuario.addActionListener(controladorUsuario);
         btn_eliminar_usuario.addActionListener(controladorUsuario);
+        btn_limpiar.addActionListener(controladorUsuario);
         Tabla_usuarios.setModel(usuarioDao.selectUsuarios());
+        
+         // METODO PARA CAPURAR LOS EVENTOS DEL MOUSE AL HACER CLICK
+        this.Tabla_usuarios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {     
+                obtenerDatosTabla(e);
+                ModificarEliminarBtn();
+            }
+        });
         Limpiar();
     }
 
     public void Limpiar() {
         txt_id_usuario.setEnabled(false);
+        txt_id_usuario.setText("");
         txt_nombres_usuario.setText("");
         txt_apellidos_usuario.setText("");
         txt_rol.setText("");
@@ -70,8 +83,26 @@ public class UsuarioForm extends javax.swing.JFrame {
         btn_eliminar_usuario.setEnabled(true);
     }
 
-    
-
+    private void obtenerDatosTabla(MouseEvent e){
+        
+        int filaSeleccionada = Tabla_usuarios.getSelectedRow();
+        
+        if(filaSeleccionada > -1){
+            String id_usuario = Tabla_usuarios.getValueAt(filaSeleccionada, 0).toString();
+            String id_rol = Tabla_usuarios.getValueAt(filaSeleccionada, 1).toString();
+            String nombres = Tabla_usuarios.getValueAt(filaSeleccionada, 2).toString();
+            String apellidos = Tabla_usuarios.getValueAt(filaSeleccionada, 3).toString();
+            String usuario = Tabla_usuarios.getValueAt(filaSeleccionada, 4).toString();
+            String contrasena = Tabla_usuarios.getValueAt(filaSeleccionada, 5).toString();
+            
+            this.txt_id_usuario.setText(id_usuario);
+            this.txt_rol.setText(id_rol);
+            this.txt_nombres_usuario.setText(nombres);
+            this.txt_apellidos_usuario.setText(apellidos);
+            this.txt_usuario.setText(usuario);
+            this.txt_contrasena.setText(contrasena);
+        }
+    }
     
 
     /**
@@ -100,6 +131,7 @@ public class UsuarioForm extends javax.swing.JFrame {
         btn_agregar_usuario = new javax.swing.JButton();
         btn_modificar_usuario = new javax.swing.JButton();
         btn_eliminar_usuario = new javax.swing.JButton();
+        btn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BIBLIOTECAUDB - USUARIOS");
@@ -138,6 +170,9 @@ public class UsuarioForm extends javax.swing.JFrame {
         btn_eliminar_usuario.setText("Eliminar");
         btn_eliminar_usuario.setActionCommand("Eliminar_usuario");
 
+        btn_limpiar.setText("Limpiar");
+        btn_limpiar.setActionCommand("Limpiar_usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,7 +202,9 @@ public class UsuarioForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_modificar_usuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_eliminar_usuario))))
+                                .addComponent(btn_eliminar_usuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_limpiar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(scroll_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -204,7 +241,8 @@ public class UsuarioForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_agregar_usuario)
                     .addComponent(btn_modificar_usuario)
-                    .addComponent(btn_eliminar_usuario))
+                    .addComponent(btn_eliminar_usuario)
+                    .addComponent(btn_limpiar))
                 .addGap(18, 18, 18)
                 .addComponent(scroll_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
@@ -221,6 +259,7 @@ public class UsuarioForm extends javax.swing.JFrame {
     public javax.swing.JTable Tabla_usuarios;
     public javax.swing.JButton btn_agregar_usuario;
     public javax.swing.JButton btn_eliminar_usuario;
+    public javax.swing.JButton btn_limpiar;
     public javax.swing.JButton btn_modificar_usuario;
     private javax.swing.JLabel lbl_apellidos_usuarios;
     private javax.swing.JLabel lbl_contrasena;
