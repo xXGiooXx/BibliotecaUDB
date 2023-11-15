@@ -11,27 +11,27 @@ package Modelo;
  */
 public class Cd {
     private int id_cd;
-    private int id_material;
     private String artista;
     private String genero;
     private String duracion;
     private int num_canciones;
+    private int id_material;
     private int id_usuario;
     private int id_categoria;
     private String codigo;
     private String titulo;
-    private String unidades_disponible;
+    private int unidades_disponible;
     
     public Cd() {
     }
-    
-    public Cd(int id_cd, int id_material, String artista, String genero, String duracion, int num_canciones, int id_usuario, int id_categoria, String codigo, String titulo, String unidades_disponible) {
+
+    public Cd(int id_cd, String artista, String genero, String duracion, int num_canciones, int id_material, int id_usuario, int id_categoria, String codigo, String titulo, int unidades_disponible) {
         this.id_cd = id_cd;
-        this.id_material = id_material;
         this.artista = artista;
         this.genero = genero;
         this.duracion = duracion;
         this.num_canciones = num_canciones;
+        this.id_material = id_material;
         this.id_usuario = id_usuario;
         this.id_categoria = id_categoria;
         this.codigo = codigo;
@@ -45,14 +45,6 @@ public class Cd {
 
     public void setId_cd(int id_cd) {
         this.id_cd = id_cd;
-    }
-
-    public int getId_material() {
-        return id_material;
-    }
-
-    public void setId_material(int id_material) {
-        this.id_material = id_material;
     }
 
     public String getArtista() {
@@ -87,6 +79,14 @@ public class Cd {
         this.num_canciones = num_canciones;
     }
 
+    public int getId_material() {
+        return id_material;
+    }
+
+    public void setId_material(int id_material) {
+        this.id_material = id_material;
+    }
+
     public int getId_usuario() {
         return id_usuario;
     }
@@ -119,12 +119,15 @@ public class Cd {
         this.titulo = titulo;
     }
 
-    public String getUnidades_disponible() {
+    public int getUnidades_disponible() {
         return unidades_disponible;
     }
 
-    public void setUnidades_disponible(String unidades_disponible) {
+    public void setUnidades_disponible(int unidades_disponible) {
         this.unidades_disponible = unidades_disponible;
     }
+
+  
+    
              
 }

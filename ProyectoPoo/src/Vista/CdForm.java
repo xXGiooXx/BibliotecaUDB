@@ -16,6 +16,7 @@ public class CdForm extends javax.swing.JFrame {
      */
     public CdForm() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
