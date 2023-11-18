@@ -10,29 +10,28 @@ package Modelo;
  * @author JONATHAN G
  */
 public class Cd {
+
     private int id_cd;
     private String artista;
     private String genero;
     private String duracion;
     private int num_canciones;
     private int id_material;
-    private int id_usuario;
     private int id_categoria;
     private String codigo;
     private String titulo;
     private int unidades_disponible;
-    
+
     public Cd() {
     }
 
-    public Cd(int id_cd, String artista, String genero, String duracion, int num_canciones, int id_material, int id_usuario, int id_categoria, String codigo, String titulo, int unidades_disponible) {
+    public Cd(int id_cd, String artista, String genero, String duracion, int num_canciones, int id_material, int id_categoria, String codigo, String titulo, int unidades_disponible) {
         this.id_cd = id_cd;
         this.artista = artista;
         this.genero = genero;
         this.duracion = duracion;
         this.num_canciones = num_canciones;
         this.id_material = id_material;
-        this.id_usuario = id_usuario;
         this.id_categoria = id_categoria;
         this.codigo = codigo;
         this.titulo = titulo;
@@ -87,14 +86,6 @@ public class Cd {
         this.id_material = id_material;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
     public int getId_categoria() {
         return id_categoria;
     }
@@ -127,7 +118,4 @@ public class Cd {
         this.unidades_disponible = unidades_disponible;
     }
 
-  
-    
-             
 }

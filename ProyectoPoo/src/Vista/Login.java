@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.ControladorLogin;
-import Modelo.Usuario;
+import Modelo.DatosSesion;
 import Modelo.Validacion_login;
 
 /**
@@ -112,10 +112,10 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        Usuario usuario = new Usuario();
+        DatosSesion datosSesion = new DatosSesion();
         Validacion_login valid_login = new Validacion_login();
         Login vistaLogin = new Login();
-        ControladorLogin controladorLogin = new ControladorLogin(usuario, valid_login, vistaLogin);
+        ControladorLogin controladorLogin = new ControladorLogin(datosSesion, valid_login, vistaLogin);
         vistaLogin.setVisible(true);
      
     }

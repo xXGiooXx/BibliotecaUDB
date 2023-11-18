@@ -5,11 +5,18 @@
  */
 package Vista;
 
+import Controlador.ControladorCd;
+import Modelo.CdDAO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  *
  * @author JONATHAN G
  */
 public class CdForm extends javax.swing.JFrame {
+
+    CdDAO cdDao = new CdDAO();
 
     /**
      * Creates new form CdForm
@@ -17,6 +24,83 @@ public class CdForm extends javax.swing.JFrame {
     public CdForm() {
         initComponents();
         setLocationRelativeTo(null);
+
+        ControladorCd controladorCd = new ControladorCd(this, cdDao);
+        btn_agregarCd.addActionListener(controladorCd);
+        btn_modificarCd.addActionListener(controladorCd);
+        btn_eliminarCd.addActionListener(controladorCd);
+        btn_limpiarCd.addActionListener(controladorCd);
+        tabla_cd.setModel(cdDao.selectCds());
+
+        // METODO PARA CAPURAR LOS EVENTOS DEL MOUSE AL HACER CLICK
+        this.tabla_cd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                obtenerDatosTabla(e);
+                ModificarEliminarBtn();
+            }
+        });
+        Limpiar();
+    }
+
+    public void ModificarEliminarBtn() {
+
+        txt_idCd.setEnabled(false);
+        txt_idMaterial.setEnabled(false);
+        txt_idCategoria.setEnabled(false);
+
+        btn_agregarCd.setEnabled(false);
+        btn_modificarCd.setEnabled(true);
+        btn_eliminarCd.setEnabled(true);
+    }
+
+    public void Limpiar() {
+        txt_idCd.setEnabled(false);
+        txt_idMaterial.setEnabled(false);
+        txt_idCategoria.setEnabled(true);
+        txt_idCd.setText("");
+        txt_idMaterial.setText("");
+        txt_idCategoria.setText("");
+        txt_artista.setText("");
+        txt_genero.setText("");
+        txt_duracion.setText("");
+        txt_numCanciones.setText("");
+        txt_codigo.setText("");
+        txt_titulo.setText("");
+        sp_unidadesDisponibles.setValue(0);
+
+        btn_agregarCd.setEnabled(true);
+        btn_modificarCd.setEnabled(false);
+        btn_eliminarCd.setEnabled(false);
+    }
+
+    private void obtenerDatosTabla(MouseEvent e) {
+
+        int filaSeleccionada = tabla_cd.getSelectedRow();
+
+        if (filaSeleccionada > -1) {
+            String id_cd = tabla_cd.getValueAt(filaSeleccionada, 0).toString();
+            String id_material = tabla_cd.getValueAt(filaSeleccionada, 1).toString();
+            String id_categoria = tabla_cd.getValueAt(filaSeleccionada, 2).toString();
+            String artista = tabla_cd.getValueAt(filaSeleccionada, 3).toString();
+            String genero = tabla_cd.getValueAt(filaSeleccionada, 4).toString();
+            String duracion = tabla_cd.getValueAt(filaSeleccionada, 5).toString();
+            String num_canciones = tabla_cd.getValueAt(filaSeleccionada, 6).toString();
+            String codigo = tabla_cd.getValueAt(filaSeleccionada, 7).toString();
+            String titulo = tabla_cd.getValueAt(filaSeleccionada, 8).toString();
+            String unidadesDisponibles = tabla_cd.getValueAt(filaSeleccionada, 9).toString();
+
+            txt_idCd.setText(id_cd);
+            txt_idMaterial.setText(id_material);
+            txt_idCategoria.setText(id_categoria);
+            txt_artista.setText(artista);
+            txt_genero.setText(genero);
+            txt_duracion.setText(duracion);
+            txt_numCanciones.setText(num_canciones);
+            txt_codigo.setText(codigo);
+            txt_titulo.setText(titulo);
+            sp_unidadesDisponibles.setValue(Integer.parseInt(unidadesDisponibles));
+        }
     }
 
     /**
@@ -37,11 +121,8 @@ public class CdForm extends javax.swing.JFrame {
         lbl_genero = new javax.swing.JLabel();
         txt_genero = new javax.swing.JTextField();
         lbl_duracion = new javax.swing.JLabel();
-        txt_duracion = new javax.swing.JFormattedTextField();
         lbl_numCanciones = new javax.swing.JLabel();
         txt_numCanciones = new javax.swing.JTextField();
-        lbl_idUsuario = new javax.swing.JLabel();
-        txt_idUsuario = new javax.swing.JTextField();
         lbl_idCategoria = new javax.swing.JLabel();
         txt_idCategoria = new javax.swing.JTextField();
         lbl_codigo = new javax.swing.JLabel();
@@ -56,8 +137,7 @@ public class CdForm extends javax.swing.JFrame {
         btn_modificarCd = new javax.swing.JButton();
         btn_eliminarCd = new javax.swing.JButton();
         btn_limpiarCd = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        txt_duracion = new javax.swing.JTextField();
 
         lbl_idCd.setText("ID:");
 
@@ -69,11 +149,7 @@ public class CdForm extends javax.swing.JFrame {
 
         lbl_duracion.setText("Duración:");
 
-        txt_duracion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("hh:mm"))));
-
         lbl_numCanciones.setText("Número de canciones:");
-
-        lbl_idUsuario.setText("ID usuario:");
 
         lbl_idCategoria.setText("ID Categoria:");
 
@@ -136,33 +212,30 @@ public class CdForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_genero, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_idMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_duracion)
-                            .addComponent(lbl_idUsuario)))
+                        .addGap(17, 17, 17)
+                        .addComponent(lbl_duracion))
                     .addComponent(txt_titulo))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_numCanciones))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_idCategoria)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_numCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(lbl_unidadesDisponible)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sp_unidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(sp_unidadesDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_idCategoria))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(txt_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(lbl_numCanciones)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_numCanciones))))
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,8 +259,6 @@ public class CdForm extends javax.swing.JFrame {
                     .addComponent(txt_idMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_idCd)
                     .addComponent(txt_idCd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_idUsuario)
-                    .addComponent(txt_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_idCategoria)
                     .addComponent(txt_idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,9 +268,9 @@ public class CdForm extends javax.swing.JFrame {
                     .addComponent(lbl_genero)
                     .addComponent(txt_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_duracion)
-                    .addComponent(txt_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_numCanciones)
-                    .addComponent(txt_numCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_numCanciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_codigo)
@@ -225,7 +296,6 @@ public class CdForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_agregarCd;
@@ -239,7 +309,6 @@ public class CdForm extends javax.swing.JFrame {
     public javax.swing.JLabel lbl_idCategoria;
     public javax.swing.JLabel lbl_idCd;
     public javax.swing.JLabel lbl_idMaterial;
-    public javax.swing.JLabel lbl_idUsuario;
     public javax.swing.JLabel lbl_numCanciones;
     public javax.swing.JLabel lbl_titulo;
     public javax.swing.JLabel lbl_unidadesDisponible;
@@ -248,12 +317,11 @@ public class CdForm extends javax.swing.JFrame {
     public javax.swing.JTable tabla_cd;
     public javax.swing.JTextField txt_artista;
     public javax.swing.JTextField txt_codigo;
-    public javax.swing.JFormattedTextField txt_duracion;
+    public javax.swing.JTextField txt_duracion;
     public javax.swing.JTextField txt_genero;
     public javax.swing.JTextField txt_idCategoria;
     public javax.swing.JTextField txt_idCd;
     public javax.swing.JTextField txt_idMaterial;
-    public javax.swing.JTextField txt_idUsuario;
     public javax.swing.JTextField txt_numCanciones;
     public javax.swing.JTextField txt_titulo;
     // End of variables declaration//GEN-END:variables
