@@ -47,7 +47,7 @@ public class ControladorUsuario implements ActionListener {
             usuarioForm.Tabla_usuarios.setModel(usuarioDao.selectUsuarios());
 
         }
-        if (e.getActionCommand().equals("Modificar_usuario")) {
+        
             if (e.getSource() == usuarioForm.btn_modificar_usuario) {
                 usuario.setId_usuario(Integer.parseInt(usuarioForm.txt_id_usuario.getText()));
                 usuario.setId_rol(Integer.parseInt(usuarioForm.txt_rol.getText()));
@@ -65,8 +65,8 @@ public class ControladorUsuario implements ActionListener {
                 usuarioForm.Tabla_usuarios.setModel(usuarioDao.selectUsuarios());
 
             }
-        }
-        if (e.getActionCommand().equals("Eliminar_usuario")) {
+  
+        
             if (e.getSource() == usuarioForm.btn_eliminar_usuario) {
                 usuario.setId_usuario(Integer.parseInt(usuarioForm.txt_id_usuario.getText()));
                 if (usuarioDao.eliminarUsuario(usuario) >= 1) {
@@ -78,7 +78,7 @@ public class ControladorUsuario implements ActionListener {
                 usuarioForm.Tabla_usuarios.setModel(usuarioDao.selectUsuarios());
 
             }
-        }
+        
 
         if (e.getActionCommand().equals("Limpiar_usuario")) {
             usuarioForm.Limpiar();         
