@@ -106,15 +106,13 @@ public class DevolucionDAO {
             stmtInsert.setString(2, devolucion.getFecha_prestamo());
             stmtInsert.setString(3, devolucion.getFecha_devolucion());
             stmtInsert.setString(4, devolucion.getObservacion());
-            stmtInsert.setInt(5, devolucion.getCantidad_devolucion());
-            stmtInsert.setDouble(6, devolucion.getMora());
+            stmtInsert.setDouble(5, devolucion.getMora());
+            stmtInsert.setInt(6, devolucion.getCantidad_devolucion());            
             rowsInsert = stmtInsert.executeUpdate();
 
             // 2. Se reintegra la cantidad a material disponible
             if (rowsInsert > 0) {
-                stmtUpdate = con.prepareStatement(SQL_UPDATE_MATERIAL);
-                System.out.println(devolucion.getCantidad_devolucion());
-                System.out.println(obtenerIdMaterial(devolucion.getId_prestamo()));
+                stmtUpdate = con.prepareStatement(SQL_UPDATE_MATERIAL);          
                 stmtUpdate.setInt(1, devolucion.getCantidad_devolucion());
                 stmtUpdate.setInt(2, obtenerIdMaterial(devolucion.getId_prestamo()));
                 stmtUpdate.executeUpdate();
