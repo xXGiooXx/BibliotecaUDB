@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `mediateca` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `mediateca`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mediateca
@@ -71,6 +73,33 @@ INSERT INTO `cds` VALUES (16,19,'asda','qwe','00:10:50',20);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `devoluciones`
+--
+
+DROP TABLE IF EXISTS `devoluciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `devoluciones` (
+  `id_devolucion` int NOT NULL AUTO_INCREMENT,
+  `id_prestamo` int NOT NULL,
+  `fecha_devolucion` date NOT NULL,
+  `observaciones` longtext COLLATE utf8mb3_spanish_ci,
+  `mora` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id_devolucion`),
+  KEY `id_prestamo_idx` (`id_prestamo`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `devoluciones`
+--
+
+LOCK TABLES `devoluciones` WRITE;
+/*!40000 ALTER TABLE `devoluciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `devoluciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `dvds`
 --
 
@@ -86,7 +115,7 @@ CREATE TABLE `dvds` (
   PRIMARY KEY (`id_dvd`),
   KEY `id_material_dvd_idx` (`id_material`),
   CONSTRAINT `id_material_dvd` FOREIGN KEY (`id_material`) REFERENCES `materiales` (`id_material`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +124,7 @@ CREATE TABLE `dvds` (
 
 LOCK TABLES `dvds` WRITE;
 /*!40000 ALTER TABLE `dvds` DISABLE KEYS */;
+INSERT INTO `dvds` VALUES (4,21,'Roberto','02:00:00','DRAMA');
 /*!40000 ALTER TABLE `dvds` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +174,7 @@ CREATE TABLE `materiales` (
   PRIMARY KEY (`id_material`),
   KEY `id_categoria_material_idx` (`id_categoria`),
   CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,8 +183,36 @@ CREATE TABLE `materiales` (
 
 LOCK TABLES `materiales` WRITE;
 /*!40000 ALTER TABLE `materiales` DISABLE KEYS */;
-INSERT INTO `materiales` VALUES (19,1,'CD0002','asdasd',145);
+INSERT INTO `materiales` VALUES (19,1,'CD0002','asdasd',109),(21,1,'DVD001','qweqwe',50);
 /*!40000 ALTER TABLE `materiales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prestamo`
+--
+
+DROP TABLE IF EXISTS `prestamo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prestamo` (
+  `id_prestamo` int NOT NULL AUTO_INCREMENT,
+  `id_material` int NOT NULL,
+  `fecha_prestamo` date NOT NULL,
+  `fecha_devolucion` date NOT NULL,
+  `cantidad` int NOT NULL,
+  PRIMARY KEY (`id_prestamo`),
+  KEY `id_material_idx` (`id_material`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prestamo`
+--
+
+LOCK TABLES `prestamo` WRITE;
+/*!40000 ALTER TABLE `prestamo` DISABLE KEYS */;
+INSERT INTO `prestamo` VALUES (2,19,'2023-11-18','2023-11-25',0),(3,19,'2023-11-18','2023-11-21',4);
+/*!40000 ALTER TABLE `prestamo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -248,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-17 18:50:41
+-- Dump completed on 2023-11-19  0:20:51
