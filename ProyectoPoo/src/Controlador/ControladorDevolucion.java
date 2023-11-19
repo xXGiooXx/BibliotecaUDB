@@ -49,8 +49,13 @@ public class ControladorDevolucion implements ActionListener {
             long diasDiferencia = ChronoUnit.DAYS.between(fechaDevolucion, fechaActual);
             System.out.println(diasDiferencia);
             double mora = diasDiferencia * 0.25;
-            System.out.println(mora);
-            devolucion.setMora(mora);
+            if(mora <= 0){
+                devolucion.setMora(0);
+            }
+            else{
+                devolucion.setMora(mora);
+            }
+            
             if ((devolucionDao.registrarDevolucion(devolucion) >= 1)) {
 
                 JOptionPane.showMessageDialog(null, "Registro Guardado exitosamente");
