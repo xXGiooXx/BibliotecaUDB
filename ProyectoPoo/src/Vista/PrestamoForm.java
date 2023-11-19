@@ -9,7 +9,9 @@ import Controlador.ControladorPrestamo;
 import Modelo.PrestamoDAO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -37,6 +39,7 @@ public class PrestamoForm extends javax.swing.JFrame {
         btn_limpiar.addActionListener(controladorPrestamo);
         table_material_disponible.setModel(prestamoDao.selectMaterial());
         table_prestamos.setModel(prestamoDao.selectPrestamo());
+        
         // METODO PARA CAPURAR LOS EVENTOS DEL MOUSE AL HACER CLICK
         this.table_material_disponible.addMouseListener(new MouseAdapter() {
             @Override
@@ -182,8 +185,6 @@ public class PrestamoForm extends javax.swing.JFrame {
         btn_crearPrestamo = new javax.swing.JButton();
         btn_modificarPrestamo = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbl_idPrestamo.setText("ID:");
 
