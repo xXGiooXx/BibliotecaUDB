@@ -85,8 +85,7 @@ public class PrestamoForm extends javax.swing.JFrame {
         txt_codigo.setText("");
         txt_titulo.setText("");
         jsp_cantidad.setValue(0);
-        jformat_fecha_prestamo.setText("");
-        jformat_fecha_devolucion.setText("");
+  
 
         btn_limpiar.setEnabled(true);
         btn_modificarPrestamo.setEnabled(false);

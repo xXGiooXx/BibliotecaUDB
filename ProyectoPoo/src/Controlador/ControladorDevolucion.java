@@ -40,13 +40,16 @@ public class ControladorDevolucion implements ActionListener {
             devolucion.setFecha_devolucion(devolucionForm.jformat_fechaDevolucion.getText());
             devolucion.setObservacion(devolucionForm.textArea_observacion.getText()); 
             devolucion.setCantidad_devolucion(Integer.parseInt(devolucionForm.txt_Cantidad.getText()));
+            
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            //LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
+            LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
             LocalDate fechaDevolucion = LocalDate.parse(devolucionForm.jformat_fechaDevolucion.getText(), formatoFecha);
             LocalDate fechaActual = LocalDate.now();
             
             long diasDiferencia = ChronoUnit.DAYS.between(fechaDevolucion, fechaActual);
+            System.out.println(diasDiferencia);
             double mora = diasDiferencia * 0.25;
+            System.out.println(mora);
             devolucion.setMora(mora);
             if ((devolucionDao.registrarDevolucion(devolucion) >= 1)) {
 
