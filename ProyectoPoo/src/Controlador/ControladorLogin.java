@@ -53,6 +53,7 @@ public class ControladorLogin implements ActionListener {
                 vistaLogin.dispose();
                 menu.setVisible(true);
                 menu.menu_gestionar_material.setVisible(false);
+                menu.menu_material_devolucion.setVisible(false);
                 menu.menu_usuarios.setVisible(false);
 
             }
