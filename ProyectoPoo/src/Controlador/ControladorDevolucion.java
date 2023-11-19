@@ -41,7 +41,7 @@ public class ControladorDevolucion implements ActionListener {
             devolucion.setObservacion(devolucionForm.textArea_observacion.getText()); 
             devolucion.setCantidad_devolucion(Integer.parseInt(devolucionForm.txt_Cantidad.getText()));
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
+            //LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
             LocalDate fechaDevolucion = LocalDate.parse(devolucionForm.jformat_fechaDevolucion.getText(), formatoFecha);
             LocalDate fechaActual = LocalDate.now();
             
