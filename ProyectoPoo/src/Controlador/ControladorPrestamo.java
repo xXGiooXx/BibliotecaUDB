@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class ControladorPrestamo implements ActionListener {
 
     PrestamoForm prestamoForm;
-    PrestamoDAO prestamoDao = new PrestamoDAO();
+    PrestamoDAO prestamoDao;
     Prestamo prestamo = new Prestamo();
 
     public ControladorPrestamo(PrestamoForm prestamoForm, PrestamoDAO prestamoDao) {
