@@ -45,6 +45,7 @@ public class PrestamoForm extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 obtenerDatosTablaMaterial(e);
+                txt_idPrestamo.setText("");
 
             }
         });
@@ -81,6 +82,7 @@ public class PrestamoForm extends javax.swing.JFrame {
         txt_idMaterial.setEnabled(false);
         txt_codigo.setEnabled(false);
         txt_titulo.setEnabled(false);
+        txt_idPrestamo.setText("");
         txt_idMaterial.setText("");
         txt_codigo.setText("");
         txt_titulo.setText("");
