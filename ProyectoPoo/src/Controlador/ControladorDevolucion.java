@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author JONATHAN G
@@ -37,26 +38,16 @@ public class ControladorDevolucion implements ActionListener {
             devolucion.setId_prestamo(Integer.parseInt(devolucionForm.txt_idPrestamo.getText()));
             devolucion.setFecha_prestamo(devolucionForm.jformat_fechaPrestamo.getText());
             devolucion.setFecha_devolucion(devolucionForm.jformat_fechaDevolucion.getText());
-            devolucion.setObservacion(devolucionForm.textArea_observacion.getText());
+            devolucion.setObservacion(devolucionForm.textArea_observacion.getText()); 
             devolucion.setCantidad_devolucion(Integer.parseInt(devolucionForm.txt_Cantidad.getText()));
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
+            //LocalDate fechaPrestamo = LocalDate.parse(devolucionForm.jformat_fechaPrestamo.getText(), formatoFecha);
             LocalDate fechaDevolucion = LocalDate.parse(devolucionForm.jformat_fechaDevolucion.getText(), formatoFecha);
             LocalDate fechaActual = LocalDate.now();
-
-            // Calcular días entre fecha préstamo y fecha devolución 
-            long diasPrestamoDevolucion = ChronoUnit.DAYS.between(fechaPrestamo, fechaDevolucion);
-
-            // Calcular días entre fecha préstamo y fecha actual
-            long diasPrestamoActual = ChronoUnit.DAYS.between(fechaDevolucion, fechaActual);
-            if (diasPrestamoActual <= diasPrestamoDevolucion) {
-                devolucion.setMora(0);
-            // Si pasó fecha devolución, calcular mora  
-            } else {              
-                double mora = diasPrestamoActual * 0.25; //0.25 por día
-                devolucion.setMora(mora);
-            }
-
+            
+            long diasDiferencia = ChronoUnit.DAYS.between(fechaDevolucion, fechaActual);
+            double mora = diasDiferencia * 0.25;
+            devolucion.setMora(mora);
             if ((devolucionDao.registrarDevolucion(devolucion) >= 1)) {
 
                 JOptionPane.showMessageDialog(null, "Registro Guardado exitosamente");
