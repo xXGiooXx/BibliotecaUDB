@@ -7,16 +7,18 @@ package Modelo;
 
 import Modelo.Conexion;
 import Modelo.Usuario;
+import Modelo.Validacion_entrada;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author JONATHAN G
+ * @author Grupo 5
  */
 public class UsuarioDAO {
 
@@ -66,6 +68,10 @@ public class UsuarioDAO {
         ResultSet rs = null;
         int rows = 0;
          try {
+               if (usuario.getNombres() == null || usuario.getNombres().isEmpty() || usuario.getApellidos() == null || usuario.getApellidos().isEmpty() ||usuario.getUsuario()== null || usuario.getUsuario().isEmpty()||usuario.getContrasena()== null || usuario.getContrasena().isEmpty() || Validacion_entrada.contieneNumeros(usuario.getNombres()) || Validacion_entrada.contieneNumeros(usuario.getApellidos()) || Validacion_entrada.contieneCaracteresEspeciales(usuario.getNombres()) || Validacion_entrada.contieneCaracteresEspeciales(usuario.getApellidos())) {
+            JOptionPane.showMessageDialog(null,"Error: Los campos deben ser válidos");
+            return 0; // Indica que no se ha realizado la inserción
+           } 
             con = Conexion.getConnection();
             stmt = con.prepareStatement(SQL_INSERT);            
             stmt.setInt(1, usuario.getId_rol());
